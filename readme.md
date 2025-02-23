@@ -7,10 +7,10 @@ The code must be used separately for each table: the DataHarmonizer class is ini
 ## Folder Structure
 ```
 /data/
-├── README.md          # This file
-├── main.py       # main script to run
-├── src       # folder with source code
-├── harmonization_maps       # folder containing for each table, the templates to indicate how to map raw data files with final model format
+├── README.md                   # This file
+├── main.py                     # main script to run
+├── src                         # folder with source code
+├── harmonization_maps          # folder containing for each table, the templates to indicate how to map raw data files with final model format
 ```
 
 ## Preliminary steps
