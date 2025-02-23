@@ -1,0 +1,10 @@
+common_dir:
+  LR: '/Users/lorenzorinaldi/Library/CloudStorage/OneDrive-SharedLibraries-PolitecnicodiMilano/DENG-PRIN-MIMO - Documents/Models'
+  
+model_structure: 
+  path: 'model_physical/model_structure.xlsx'
+
+model_data_folder: 
+  path: 'model_physical/pyesm_model/input_data'
+ 
+ 
