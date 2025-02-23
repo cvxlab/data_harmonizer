@@ -16,7 +16,7 @@ The code must be used separately for each table: the DataHarmonizer class is ini
 ## Preliminary steps
 - In the src folder, set up the "paths.yml" file by specificying your "common_dir" path (use your initials)
 - model_structure targets the main Excel file containing all info about the model
-- model_dat_folder targets the folder containing the empty model input files, to be filled 
+- empty_model_data_folder targets the folder containing the empty model input files to be filled 
 
 ## Usage
 - The code works in the usual pyesm Python environment

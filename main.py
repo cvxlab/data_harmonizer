@@ -15,7 +15,7 @@ with open('src/paths.yml', 'r') as file:
     paths = yaml.safe_load(file)
     shared_folder = paths['common_dir'][user]
     model_structure = paths['model_structure']['path']
-    model_data_folder = paths['model_data_folder']['path']
+    empty_model_data_folder = paths['empty_model_data_folder']['path']
 
 
 #%% Harmonize data
@@ -25,7 +25,7 @@ DH = DataHarmonizer(
     tables_files_map[table], 
     shared_folder, 
     model_structure,
-    model_data_folder,
+    empty_model_data_folder,
 )
 
 #%% Export data map templates
@@ -39,5 +39,10 @@ DH.parse_mapped_raw_data()
 
 # %% Harmonize the data
 DH.harmonize_data(report_missing_values=True)
+
+# %% Export harmonized data
+DH.export(
+    path = "choseyourpath.xlsx"
+)
 
 # %%

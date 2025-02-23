@@ -287,3 +287,9 @@ class DataHarmonizer:
                     if column != 'values':
                         unique_values = missing_values[column].dropna().unique()
                         print(f"\nUnique values in column '{column}': {unique_values}")
+
+    def export(
+            self,
+            path:str,
+    ):
+        self.harmonized_data.to_excel(path, index=False)

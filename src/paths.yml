@@ -4,7 +4,7 @@ common_dir:
 model_structure: 
   path: 'model_physical/model_structure.xlsx'
 
-model_data_folder: 
+empty_model_data_folder: 
   path: 'model_physical/pyesm_model/input_data'
  
  
