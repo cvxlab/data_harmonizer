@@ -6,7 +6,7 @@ The code must be used separately for each table: the DataHarmonizer class is ini
 
 ## Folder Structure
 ```
-/data/
+folder/
 ├── README.md                   # This file
 ├── main.py                     # main script to run
 ├── src                         # folder with source code
