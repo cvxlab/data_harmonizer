@@ -25,8 +25,8 @@ folder/
 - For each table, you need to specify which files you need raw data from, along with their metadata. The mandatory information to specify here are:
     - "sets_to_columns_map" (mapping table coordinates with raw data file columns)
     - "values" (mapping the column of raw data file storing values)
-    - "path" (reporting the path to the raw data file, excluding the one reported as "main_dir")
-N.B. The raw data files, for the moment, must be in flat csv formats
+    - "path" (reporting the path to the raw data file, excluding the one reported as "main_dir"). N.B. The raw data files, for the moment, must be in flat csv formats
+    
 - Run the main.py script
     - load dependencies and yml files
     - provide the name of a table and initialize the DataHarmonizer class
@@ -36,4 +36,14 @@ N.B. The raw data files, for the moment, must be in flat csv formats
     - "harmonize_data" will apply all the modifications to the raw data according to instructions provided in the "hmap.xlsx" files
     - "export" will export an excel file in the model format. By default, the "post_harmonization_folder/<table>.xlsx" path will be adopted, unless another path is provided
 
-    
+- Working in the main folder:
+    - all the data collected are in the "_all" folder
+    - "pbi reports" contains some reports built with powerbi in the past
+    - pre-harmonization contains:
+        - a folder for each table, which contains a subfolder for each file required to fill each table
+        - in each subfolder, the code will create the "hmap_empty.xlsx" file, that the user needs to fill.
+        - the user should rename "hamp_empty.xlsx" into "hmap.xlsx". 
+        - during the filling process, all the side-calculations (e.g. calculations of the shares according to which the raw data should be split in the model...) should be performed alternatively in the "hmap.xlsx" file itself (in new tabs) or in other excel files within the same subfolder
+        - cite any additional data used and make clear all the made assumptions.
+
+
