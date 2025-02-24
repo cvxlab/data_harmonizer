@@ -2,10 +2,10 @@ main_folder:
   LR: '/Users/lorenzorinaldi/Library/CloudStorage/OneDrive-SharedLibraries-PolitecnicodiMilano/DENG-PRIN-MIMO - Documents/Models'
   
 pre_harmonization_folder:
-  path: 'inputs/data/pre_harmonization'
+  path: 'data/pre_harmonization'
 
 post_harmonization_folder:
-  path: 'inputs/data/post_harmonization'
+  path: 'data/post_harmonization'
 
 empty_model_data_folder: 
   path: 'model_physical/pyesm_model/input_data_empty'
