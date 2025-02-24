@@ -26,7 +26,7 @@ folder/
     - "sets_to_columns_map" (mapping table coordinates with raw data file columns)
     - "values" (mapping the column of raw data file storing values)
     - "path" (reporting the path to the raw data file, excluding the one reported as "main_dir"). N.B. The raw data files, for the moment, must be in flat csv formats
-    
+
 - Run the main.py script
     - load dependencies and yml files
     - provide the name of a table and initialize the DataHarmonizer class
