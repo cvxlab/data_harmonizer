@@ -30,11 +30,11 @@ folder/
 - Run the main.py script
     - load dependencies and yml files
     - provide the name of a table and initialize the DataHarmonizer class
-    - "get_data_map_template" will generate a "hmap_empty.xlsx" file in the "pre_harmonization/<table>/<file>" for each of the raw data files required to fill the given table
+    - "get_data_map_template" will generate a "hmap_empty.xlsx" file in the "pre_harmonization/table/file" for each of the raw data files required to fill the given table
     - "read_data_map_template" will load all the "hmnap.xslx" files (the user must rename the file removing the "empty" string manually). It is possible to provide a list with a subset of files, but by default it will parse the harmonization maps of all the files
     - "parse_mapped_raw_data" will parse the each raw data input file according to its path, as provided in the "tables_files_map.yml" file  
     - "harmonize_data" will apply all the modifications to the raw data according to instructions provided in the "hmap.xlsx" files
-    - "export" will export an excel file in the model format. By default, the "post_harmonization_folder/<table>.xlsx" path will be adopted, unless another path is provided
+    - "export" will export an excel file in the model format. By default, the "post_harmonization_folder/table.xlsx" path will be adopted, unless another path is provided
 
 - Working in the main folder:
     - all the data collected are in the "_all" folder
