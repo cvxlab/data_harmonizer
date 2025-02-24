@@ -1,10 +1,14 @@
-common_dir:
+main_folder:
   LR: '/Users/lorenzorinaldi/Library/CloudStorage/OneDrive-SharedLibraries-PolitecnicodiMilano/DENG-PRIN-MIMO - Documents/Models'
   
-model_structure: 
-  path: 'model_physical/model_structure.xlsx'
+pre_harmonization_folder:
+  path: 'inputs/data/pre_harmonization'
+
+post_harmonization_folder:
+  path: 'inputs/data/post_harmonization'
 
 empty_model_data_folder: 
-  path: 'model_physical/pyesm_model/input_data'
+  path: 'model_physical/pyesm_model/input_data_empty'
  
- 
+model_structure: 
+  path: 'model_physical/model_structure.xlsx'

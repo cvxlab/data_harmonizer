@@ -13,7 +13,9 @@ with open('src/tables_files_map.yml', 'r') as file:
 # Load the paths from the YAML file
 with open('src/paths.yml', 'r') as file:
     paths = yaml.safe_load(file)
-    shared_folder = paths['common_dir'][user]
+    main_folder = paths['main_folder'][user]
+    pre_harmonization_folder = paths['pre_harmonization_folder']['path']
+    post_harmonization_folder = paths['post_harmonization_folder']['path']
     model_structure = paths['model_structure']['path']
     empty_model_data_folder = paths['empty_model_data_folder']['path']
 
@@ -23,13 +25,15 @@ table = 'E_hist_ex' # specifies the table to be harmonized
 DH = DataHarmonizer(
     table, 
     tables_files_map[table], 
-    shared_folder, 
-    model_structure,
+    main_folder, 
+    pre_harmonization_folder,
+    post_harmonization_folder,
     empty_model_data_folder,
+    model_structure,
 )
 
-#%% Export data map templates
-# DH.get_data_map_template()
+# %% Export empty data map templates
+DH.get_data_map_template()
 
 # %% Read back the data map template filled + re-export it adding merge-split info
 DH.read_data_map_template()
@@ -38,11 +42,11 @@ DH.read_data_map_template()
 DH.parse_mapped_raw_data()
 
 # %% Harmonize the data
-DH.harmonize_data(report_missing_values=True)
+DH.harmonize_data(
+    # report_missing_values=True,
+    )
 
 # %% Export harmonized data
-DH.export(
-    path = "choseyourpath.xlsx"
-)
+DH.export()
 
 # %%

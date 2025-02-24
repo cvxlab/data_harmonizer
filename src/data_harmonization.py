@@ -8,34 +8,38 @@ class DataHarmonizer:
             self, 
             table:str,
             table_file_map:dict,
-            folder:str,
+            main_folder:str,
+            pre_harmonization_folder: str,
+            post_harmonization_folder: str,
+            empty_model_data_folder:str,
             model_structure_path:str,
-            model_masks_folder:str,
         ):
 
         self.table = table
         self.raw_data = {}
-        self.folder = folder
+        self.main_dir = main_folder
+        self.pre_harmonization_dir = pre_harmonization_folder
+        self.post_harmonization_dir = post_harmonization_folder
+        self.empty_model_data_folder = empty_model_data_folder
+
         self.table_file_map = table_file_map
 
         print(f"Reading model structure from {model_structure_path}")
         self.model_structure = pd.read_excel(
-            os.path.join(folder, model_structure_path),
+            os.path.join(self.main_dir, model_structure_path),
             sheet_name=None,
         )
 
-        print(f"Reading model mask from {model_masks_folder}")
+        print(f"Reading model mask from {self.empty_model_data_folder}")
         self.model_mask = pd.read_excel(
-            os.path.join(self.folder, model_masks_folder, f"{self.table}.xlsx"), 
+            os.path.join(self.main_dir, self.empty_model_data_folder, f"{self.table}.xlsx"), 
             sheet_name=self.table
         ) 
 
     def get_data_map_template(
             self,
-            map_folder: str = 'harmonization_maps',
             model: str = 'phy',
             capacity_unit: bool = False,
-            overwrite: bool = False
         ):
             
             for file,info in self.table_file_map.items():
@@ -43,18 +47,12 @@ class DataHarmonizer:
                 # Create a new Excel writer object
                 sets_to_columns_map = info['sets_to_columns_map']
 
-                table_dir = os.path.join(map_folder, self.table)
+                table_dir = os.path.join(self.main_dir, self.pre_harmonization_dir, self.table, file)
                 if not os.path.exists(table_dir):
                     os.makedirs(table_dir)
-                output_path = os.path.join(table_dir, f"{file}.xlsx")
                 
-                if not overwrite:
-                    if os.path.exists(output_path):
-                        overwrite = input(f"{output_path} already exists. Do you want to overwrite it? (y/n): ")
-                        if overwrite.lower() != 'y':
-                            continue
+                with pd.ExcelWriter(f"{table_dir}/hmap_empty.xlsx", engine='openpyxl') as writer:
 
-                with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
                     # For each column in the dataframe, create a new sheet with unique values
                     for column in self.model_mask.columns:
                         if column not in ['id', 'values']:
@@ -114,21 +112,21 @@ class DataHarmonizer:
 
     def read_data_map_template(
             self,
-            folder:str = 'harmonization_maps',
             files:list = 'all',
     ):
         
         if files == 'all':
-            files = os.listdir(os.path.join(folder, self.table))
+            files = os.listdir(os.path.join(self.main_dir, self.pre_harmonization_dir, self.table))
+            files = [f for f in files if f != ".DS_Store"] # remove hidden files
         
         maps = {}
         for file in files:
-            maps[file.split('.')[0]] = pd.read_excel(os.path.join(folder, self.table, file), sheet_name=None)
-            for sheet_name, df in maps[file.split('.')[0]].items():
+            maps[file] = pd.read_excel(os.path.join(self.main_dir, self.pre_harmonization_dir, self.table, file, 'hmap.xlsx'), sheet_name=None)
+            for sheet_name, df in maps[file].items():
                 if sheet_name != 'metadata':
-                    maps[file.split('.')[0]][sheet_name] = df.dropna(axis=0, how='all', subset=df.columns[1:])
-                    maps[file.split('.')[0]][sheet_name].set_index([i for i in maps[file.split('.')[0]][sheet_name].columns if i != self.table_file_map[file.split(".")[0]]['sets_to_columns_map'][sheet_name]], inplace=True)
-                    maps[file.split('.')[0]][sheet_name] = maps[file.split('.')[0]][sheet_name].apply(lambda x: x.astype(str).str.split(',').explode()).reset_index()
+                    maps[file][sheet_name] = df.dropna(axis=0, how='all', subset=df.columns[1:])
+                    maps[file][sheet_name].set_index([i for i in maps[file][sheet_name].columns if i != self.table_file_map[file]['sets_to_columns_map'][sheet_name]], inplace=True)
+                    maps[file][sheet_name] = maps[file][sheet_name].apply(lambda x: x.astype(str).str.split(',').explode()).reset_index()
 
         self.data_map = maps
     
@@ -155,7 +153,7 @@ class DataHarmonizer:
         for file in files:
             info = self.data_map[file].copy()
             info['metadata'].set_index('label', inplace=True)
-            file_path = os.path.join(self.folder, info['metadata'].loc['path','value'])
+            file_path = os.path.join(self.main_dir, info['metadata'].loc['path','value'])
 
             self.raw_data[file] = pd.read_csv(file_path)
             
@@ -290,6 +288,9 @@ class DataHarmonizer:
 
     def export(
             self,
-            path:str,
+            path: str = None,
     ):
+        if path == None:
+            path = os.path.join(self.main_dir, self.post_harmonization_dir, f"{self.table}.xlsx")
+    
         self.harmonized_data.to_excel(path, index=False)
