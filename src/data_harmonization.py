@@ -43,7 +43,8 @@ class DataHarmonizer:
         ):
             
             for file,info in self.table_file_map.items():
-                
+                print(f"Creating data map template for {file}")
+
                 # Create a new Excel writer object
                 sets_to_columns_map = info['sets_to_columns_map']
 
@@ -121,9 +122,10 @@ class DataHarmonizer:
         
         maps = {}
         for file in files:
+            print(f"Reading data map for {file}")
             maps[file] = pd.read_excel(os.path.join(self.main_dir, self.pre_harmonization_dir, self.table, file, 'hmap.xlsx'), sheet_name=None)
             for sheet_name, df in maps[file].items():
-                if sheet_name != 'metadata':
+                if sheet_name in self.table_file_map[file]['sets_to_columns_map']:
                     maps[file][sheet_name] = df.dropna(axis=0, how='all', subset=df.columns[1:])
                     maps[file][sheet_name].set_index([i for i in maps[file][sheet_name].columns if i != self.table_file_map[file]['sets_to_columns_map'][sheet_name]], inplace=True)
                     maps[file][sheet_name] = maps[file][sheet_name].apply(lambda x: x.astype(str).str.split(',').explode()).reset_index()
@@ -151,6 +153,7 @@ class DataHarmonizer:
         files = list(self.data_map.keys())
 
         for file in files:
+            print(f"Parsing raw data for {file}")
             info = self.data_map[file].copy()
             info['metadata'].set_index('label', inplace=True)
             file_path = os.path.join(self.main_dir, info['metadata'].loc['path','value'])
@@ -160,16 +163,18 @@ class DataHarmonizer:
             columns_to_keep = []
             for set_name, df in info.items():
                 if set_name != 'metadata':
-                    column_name = self.table_file_map[file]['sets_to_columns_map'][set_name]
-                    mapped_labels = self.data_map[file][set_name][column_name]
-                    mapped_labels = mapped_labels.dropna()
-                    mapped_labels = mapped_labels[mapped_labels != 'nan']
+                    if set_name in self.table_file_map[file]['sets_to_columns_map']:
 
-                    if set_name == 'years':
-                        mapped_labels = mapped_labels.astype('float').astype('int64')
+                        column_name = self.table_file_map[file]['sets_to_columns_map'][set_name]
+                        mapped_labels = self.data_map[file][set_name][column_name]
+                        mapped_labels = mapped_labels.dropna()
+                        mapped_labels = mapped_labels[mapped_labels != 'nan']
 
-                    self.raw_data[file] = self.raw_data[file].query(f"{column_name} in @mapped_labels")
-                    columns_to_keep.append(column_name)
+                        if set_name == 'years':
+                            mapped_labels = mapped_labels.astype('float').astype('int64')
+
+                        self.raw_data[file] = self.raw_data[file].query(f"{column_name} in @mapped_labels")
+                        columns_to_keep.append(column_name)
 
             value_column = self.table_file_map[file]['values']
             columns_to_keep.append(value_column)
@@ -190,6 +195,8 @@ class DataHarmonizer:
         harmonized_data = self.model_mask.copy()
 
         for file in self.raw_data.keys():
+            print(f"Harmonizing data for {file}")
+
             # Extract mapping for this file
             # column_mapping = {v:k+"_Name" for k,v in self.table_file_map[file]['sets_to_columns_map'].items()}
             column_mapping = {v:k+"_Name" for k,v in self.table_file_map[file]['sets_to_columns_map'].items()}
@@ -292,5 +299,6 @@ class DataHarmonizer:
     ):
         if path == None:
             path = os.path.join(self.main_dir, self.post_harmonization_dir, f"{self.table}.xlsx")
-    
+
+        print(f"Exporting harmonized data to {path}")
         self.harmonized_data.to_excel(path, index=False)
