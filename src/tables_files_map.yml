@@ -1,12 +1,12 @@
 E_hist_ex:
-  EUROSTAT energy balances: # don't use "." in the key
+  Energy balances: # don't use "." in the key
     ref_code: r_ESTAT_24_IT_nrg_bal_c
     title: Complete energy balances, Italy, 2024
     author: EUROSTAT
     type: database
     year: 2024
     url: https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c__custom_12756828/default/table
-    path: 'data/_all/r_ESTAT_24_IT_nrg_bal_c/raw_data_energy balances/nrg_bal_c__custom_12756757_linear.csv'
+    path: 'data/_all/r_ESTAT_25_IT_nrg_bal_c/raw_data_energy balances/nrg_bal_c_IT_24.csv'
     sets_to_columns_map:
       products: siec
       technologies: nrg_bal

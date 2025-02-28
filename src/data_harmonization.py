@@ -128,7 +128,13 @@ class DataHarmonizer:
                 if sheet_name in self.table_file_map[file]['sets_to_columns_map']:
                     maps[file][sheet_name] = df.dropna(axis=0, how='all', subset=df.columns[1:])
                     maps[file][sheet_name].set_index([i for i in maps[file][sheet_name].columns if i != self.table_file_map[file]['sets_to_columns_map'][sheet_name]], inplace=True)
-                    maps[file][sheet_name] = maps[file][sheet_name].apply(lambda x: x.astype(str).str.split(',').explode()).reset_index()
+                    
+                    if 'merge_split' in maps[file][sheet_name].columns:
+                        sum_rows = maps[file][sheet_name]['merge_split'] == 'sum'
+                        maps[file][sheet_name].loc[sum_rows] = maps[file][sheet_name].loc[sum_rows].apply(lambda x: x.astype(str).str.split(',').explode()).reset_index(drop=True)
+                    
+                    maps[file][sheet_name].reset_index(inplace=True)    
+                    # maps[file][sheet_name] = maps[file][sheet_name].apply(lambda x: x.astype(str).str.split(',').explode()).reset_index()
 
         self.data_map = maps
     
@@ -301,4 +307,4 @@ class DataHarmonizer:
             path = os.path.join(self.main_dir, self.post_harmonization_dir, f"{self.table}.xlsx")
 
         print(f"Exporting harmonized data to {path}")
-        self.harmonized_data.to_excel(path, sheet_name=self.table, index=False)
+        self.harmonized_data.to_excel(path, index=False, sheet_name=self.table)
