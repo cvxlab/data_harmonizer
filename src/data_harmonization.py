@@ -301,4 +301,4 @@ class DataHarmonizer:
             path = os.path.join(self.main_dir, self.post_harmonization_dir, f"{self.table}.xlsx")
 
         print(f"Exporting harmonized data to {path}")
-        self.harmonized_data.to_excel(path, index=False)
+        self.harmonized_data.to_excel(path, sheet_name=self.table, index=False)
