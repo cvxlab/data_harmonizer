@@ -68,3 +68,17 @@ E_hist_ex:
       technologies: technology
       years: year
     values: value
+  
+  Road frieght transport demand: 
+    ref_code: r_SESAM_25_IT_MIMO_roadfreight_by_techyear
+    title: Road freight transport service demand in Italy by technology and year
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:x:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_roadfreight_by_techyear/r_SESAM_25_IT_MIMO_roadfreight_by_techyear.csv?d=w2c4df9a6de1642b8b1b4678ac1893e20&csf=1&web=1&e=iy0akR
+    path: 'data/_all/r_SESAM_25_IT_MIMO_roadfreight_by_techyear/r_SESAM_25_IT_MIMO_roadfreight_by_techyear.csv'
+    sets_to_columns_map:
+      products: product
+      technologies: technology
+      years: year
+    values: value

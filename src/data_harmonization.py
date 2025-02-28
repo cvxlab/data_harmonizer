@@ -128,13 +128,7 @@ class DataHarmonizer:
                 if sheet_name in self.table_file_map[file]['sets_to_columns_map']:
                     maps[file][sheet_name] = df.dropna(axis=0, how='all', subset=df.columns[1:])
                     maps[file][sheet_name].set_index([i for i in maps[file][sheet_name].columns if i != self.table_file_map[file]['sets_to_columns_map'][sheet_name]], inplace=True)
-                    
-                    if 'merge_split' in maps[file][sheet_name].columns:
-                        sum_rows = maps[file][sheet_name]['merge_split'] == 'sum'
-                        maps[file][sheet_name].loc[sum_rows] = maps[file][sheet_name].loc[sum_rows].apply(lambda x: x.astype(str).str.split(',').explode()).reset_index(drop=True)
-                    
-                    maps[file][sheet_name].reset_index(inplace=True)    
-                    # maps[file][sheet_name] = maps[file][sheet_name].apply(lambda x: x.astype(str).str.split(',').explode()).reset_index()
+                    maps[file][sheet_name] = maps[file][sheet_name].apply(lambda x: x.astype(str).str.split('+').explode()).reset_index()
 
         self.data_map = maps
     
@@ -156,7 +150,8 @@ class DataHarmonizer:
             print("Data map not found. Reading it with default parameters.")
             self.read_data_map_template(files=files)
 
-        files = list(self.data_map.keys())
+        if files == 'all':
+            files = list(self.data_map.keys())
 
         for file in files:
             print(f"Parsing raw data for {file}")
@@ -191,6 +186,7 @@ class DataHarmonizer:
 
     def harmonize_data(
             self,
+            files: list = 'all',
             report_missing_values = False,
     ):
 
@@ -200,7 +196,10 @@ class DataHarmonizer:
 
         harmonized_data = self.model_mask.copy()
 
-        for file in self.raw_data.keys():
+        if files == 'all':
+            files = list(self.raw_data.keys())
+
+        for file in files:
             print(f"Harmonizing data for {file}")
 
             # Extract mapping for this file
@@ -272,6 +271,7 @@ class DataHarmonizer:
                         
                     raw_data_renamed.index = range(len(raw_data_renamed))  # resetting index
 
+            raw_data_renamed.drop_duplicates(inplace=True)
             raw_data_renamed.set_index([c for c in raw_data_renamed.columns if c != 'values'], inplace=True)
             harmonized_data.set_index([c for c in harmonized_data.columns if c not in ['id','values']], inplace=True)
 
@@ -308,3 +308,4 @@ class DataHarmonizer:
 
         print(f"Exporting harmonized data to {path}")
         self.harmonized_data.to_excel(path, index=False, sheet_name=self.table)
+# %%
