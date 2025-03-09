@@ -124,9 +124,9 @@ class DataHarmonizer:
         for file in files:
             print(f"Reading data map for {file}")
             maps[file] = pd.read_excel(os.path.join(self.main_dir, self.pre_harmonization_dir, self.table, file, 'hmap.xlsx'), sheet_name=None)
-            for sheet_name, df in maps[file].items():
+            for sheet_name in maps[file]:
                 if sheet_name in self.table_file_map[file]['sets_to_columns_map']:
-                    maps[file][sheet_name] = df.dropna(axis=0, how='all', subset=df.columns[1:])
+                    maps[file][sheet_name] = maps[file][sheet_name].dropna(axis=0, how='all', subset=maps[file][sheet_name].columns[1:])
                     maps[file][sheet_name].set_index([i for i in maps[file][sheet_name].columns if i != self.table_file_map[file]['sets_to_columns_map'][sheet_name]], inplace=True)
                     maps[file][sheet_name] = maps[file][sheet_name].apply(lambda x: x.astype(str).str.split('+').explode()).reset_index()
 
@@ -273,6 +273,8 @@ class DataHarmonizer:
 
             raw_data_renamed.drop_duplicates(inplace=True)
             raw_data_renamed.set_index([c for c in raw_data_renamed.columns if c != 'values'], inplace=True)
+            raw_data_renamed = raw_data_renamed.groupby(level=[c for c in raw_data_renamed.index.names if c != 'values']).sum()
+
             harmonized_data.set_index([c for c in harmonized_data.columns if c not in ['id','values']], inplace=True)
 
             harmonized_data.update(raw_data_renamed)
