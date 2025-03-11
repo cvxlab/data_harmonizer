@@ -103,6 +103,7 @@ v:
     sets_to_columns_map:
       sectors: sector
       products: product
+      years: year
     values: value
 
 m:
@@ -117,4 +118,47 @@ m:
     sets_to_columns_map:
       sectors: matrix
       products: product
+      years: year
     values: value
+
+I_st:
+  All:
+    ref_code: r_SESAM_25_MIMO_sector-by-tech-identity
+    title: Sectors-by-technology identity matrix for MIMO database
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_MIMO_sector-by-tech-identity?csf=1&web=1&e=SixZUC
+    path: 'data/_all/r_SESAM_25_MIMO_sector-by-tech-identity/r_SESAM_25_MIMO_sector-by-tech-identity.csv'
+    sets_to_columns_map:
+      sectors: sector
+      technologies: technology
+    values: value
+
+u:
+  Model specific:
+    ref_code: r_SESAM_25_MIMO_use_model-specific
+    title: Model-specific use coefficients for special technologies
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:x:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/model-specific%20techs/r_SESAM_25_MIMO_use_model-specific.csv?d=wb554663df41c4632ab42de79a0c159a3&csf=1&web=1&e=MNcN83
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/model-specific techs/r_SESAM_25_MIMO_use_model-specific.csv'
+    sets_to_columns_map:
+      products: product
+      technologies: technology
+      years: year
+    values: value
+  Electricity:
+    ref_code: r_SESAM_25_MIMO_use_ee
+    title: Electricity generation technologies effiiciency, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:x:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/model-specific%20techs/r_SESAM_25_MIMO_use_model-specific.csv?d=wb554663df41c4632ab42de79a0c159a3&csf=1&web=1&e=MNcN83
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/electricity/r_SESAM_25_MIMO_use_ee.csv'
+    sets_to_columns_map:
+      products: Product
+      technologies: Technology
+      years: Year
+    values: Value
