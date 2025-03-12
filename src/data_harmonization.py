@@ -277,6 +277,7 @@ class DataHarmonizer:
 
             harmonized_data.set_index([c for c in harmonized_data.columns if c not in ['id','values']], inplace=True)
 
+            raw_data_renamed = raw_data_renamed.reorder_levels(harmonized_data.index.names)
             harmonized_data.update(raw_data_renamed)
 
             raw_data_renamed.reset_index(inplace=True)
