@@ -58,7 +58,10 @@ class DataHarmonizer:
                     for column in self.model_mask.columns:
                         if column not in ['id', 'values']:
                             unique_values = self.model_mask[column].dropna().unique()
-                            set_name = column.split("_")[0]
+                            if column.count("_") == 1:
+                                set_name = column.split("_")[0]
+                            else:
+                               set_name = column.rsplit("_", 1)[0]
                             units = self.get_set_units(set_name=set_name,model=model,capacity=capacity_unit)
                             df_unique = pd.DataFrame({set_name: unique_values})
 
