@@ -58,7 +58,10 @@ class DataHarmonizer:
                     for column in self.model_mask.columns:
                         if column not in ['id', 'values']:
                             unique_values = self.model_mask[column].dropna().unique()
-                            set_name = column.split("_")[0]
+                            if column.count("_") == 1:
+                                set_name = column.split("_")[0]
+                            else:
+                               set_name = column.rsplit("_", 1)[0]
                             units = self.get_set_units(set_name=set_name,model=model,capacity=capacity_unit)
                             df_unique = pd.DataFrame({set_name: unique_values})
 
@@ -277,6 +280,7 @@ class DataHarmonizer:
 
             harmonized_data.set_index([c for c in harmonized_data.columns if c not in ['id','values']], inplace=True)
 
+            raw_data_renamed = raw_data_renamed.reorder_levels(harmonized_data.index.names)
             harmonized_data.update(raw_data_renamed)
 
             raw_data_renamed.reset_index(inplace=True)
