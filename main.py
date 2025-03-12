@@ -4,7 +4,7 @@ import os
 import yaml
 from src.data_harmonization import DataHarmonizer
 
-user = 'VB' # specifies the user
+user = 'LR' # specifies the user
 
 # Load the table to file map from the YAML file
 with open('src/tables_files_map.yml', 'r') as file:
@@ -21,7 +21,7 @@ with open('src/paths.yml', 'r') as file:
 
 
 #%% Harmonize data
-table = 'av_h' # specifies the table to be harmonized
+table = 'E_hist_ex' # specifies the table to be harmonized
 DH = DataHarmonizer(
     table, 
     tables_files_map[table], 
