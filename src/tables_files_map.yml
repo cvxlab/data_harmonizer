@@ -162,3 +162,107 @@ u:
       technologies: Technology
       years: Year
     values: Value
+  Residential housing:
+    ref_code: r_SESAM_25_MIMO_use_hhhous
+    title: Residential houses fuel consumption coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/living%20housing?csf=1&web=1&e=WK7k6B
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/living housing/r_SESAM_25_MIMO_use_hhhous.csv'
+    sets_to_columns_map:
+      products: Product
+      technologies: Technology
+      years: Year
+    values: Value
+  Non-residential housing:
+    ref_code: r_SESAM_25_MIMO_use_workhous
+    title: Non-residential houses fuel consumption coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/working%20housing?csf=1&web=1&e=A3KJbU
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/working housing/r_SESAM_25_MIMO_use_workhous.csv'
+    sets_to_columns_map:
+      products: Product
+      technologies: Technology
+      years: Year
+    values: Value
+  Hydrogen:
+    ref_code: r_SESAM_25_MIMO_use_h2
+    title: Hydrogen production fuel consumption coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/hydrogen?csf=1&web=1&e=gtBIkr
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/hydrogen/r_SESAM_25_MIMO_use_h2.csv'
+    sets_to_columns_map:
+      products: Product
+      technologies: Technology
+      years: Year
+    values: Value
+  Steel:
+    ref_code: r_SESAM_25_MIMO_use_steel
+    title: Steel production fuel consumption coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/steel?csf=1&web=1&e=s668aQ
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/steel/r_SESAM_25_MIMO_use_steel.csv'
+    sets_to_columns_map:
+      products: Product
+      technologies: Technology
+      years: Year
+    values: Value
+  Cement:
+    ref_code: r_SESAM_25_MIMO_use_steel
+    title: Cement production fuel consumption coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/cement?csf=1&web=1&e=buhO5Q
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/cement/r_SESAM_25_MIMO_use_cement.csv'
+    sets_to_columns_map:
+      products: Product
+      technologies: Technology
+      years: Year
+    values: Value
+  Transport:
+    ref_code: r_SESAM_25_MIMO_use_transport
+    title: Transport technologies fuel consumption coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/cement?csf=1&web=1&e=buhO5Q
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/transport/r_SESAM_25_MIMO_use_transport.csv'
+    sets_to_columns_map:
+      products: Product
+      technologies: Technology
+      years: Year
+    values: Value
+  Uranium and mining:
+    ref_code: r_SESAM_25_MIMO_use_ura_min
+    title: Uranium enrichment and fuels mining fuel consumption coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/uranium%20and%20mining?csf=1&web=1&e=klAu2E
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/uranium and mining/r_SESAM_25_MIMO_use_ura_min.csv'
+    sets_to_columns_map:
+      products: Product
+      technologies: Technology
+      years: Year
+    values: Value
+  Refineries:
+    ref_code: r_SESAM_25_MIMO_use_refinery
+    title: Refinery fuel coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_usecoefficients/uranium%20and%20mining?csf=1&web=1&e=klAu2E
+    path: 'data/_all/r_SESAM_25_IT_MIMO_usecoefficients/fuel transformations/r_SESAM_25_MIMO_use_refinery.csv'
+    sets_to_columns_map:
+      products: Product
+      technologies: Technology
+      years: Year
+    values: Value

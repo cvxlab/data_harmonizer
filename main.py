@@ -21,7 +21,7 @@ with open('src/paths.yml', 'r') as file:
 
 
 #%% Harmonize data
-table = 'm' # specifies the table to be harmonized
+table = 'u' # specifies the table to be harmonized
 DH = DataHarmonizer(
     table, 
     tables_files_map[table], 
