@@ -21,8 +21,12 @@ with open('src/paths.yml', 'r') as file:
 
 
 #%% Harmonize data
+<<<<<<< Updated upstream
 table = 'constraints' # specifies the table to be harmonized
 
+=======
+table = 'delays' # specifies the table to be harmonized
+>>>>>>> Stashed changes
 DH = DataHarmonizer(
     table, 
     tables_files_map[table], 

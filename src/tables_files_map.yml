@@ -408,6 +408,19 @@ delays:
       physical_data: physical
       years: year
     values: value
+    cons_to_ope:
+    ref_code: r_SESAM_25_IT_MIMO_delays
+    title: Technologies' construction to operation delays
+    author: SESAM
+    type: database
+    year: 2025
+    url:
+    path: 'data/_all/r_SESAM_25_IT_MIMO_delays/cons_to_ope.csv'
+    sets_to_columns_map:
+      technologies: techs
+      physical_data: physical
+      years: year
+    values: value
 
 c:
   All:
@@ -443,5 +456,18 @@ constraints:
         Technology production share | Maximum: 0.05
         Technology production share | Minimum: -0.05
       
+
+
+
+    
+
+
+
+
+
+
+
+
+
 
 
