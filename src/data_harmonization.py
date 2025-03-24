@@ -2,6 +2,10 @@
 import pandas as pd
 import os
 
+_keywords = [
+    '_tolerance'
+]
+
 #%% Class to harmonize data
 class DataHarmonizer:
     def __init__(
@@ -62,23 +66,25 @@ class DataHarmonizer:
                                 set_name = column.split("_")[0]
                             else:
                                set_name = column.rsplit("_", 1)[0]
-                            units = self.get_set_units(set_name=set_name,model=model,capacity=capacity_unit)
-                            df_unique = pd.DataFrame({set_name: unique_values})
+                            
+                            if sets_to_columns_map[set_name] not in _keywords:
+                                units = self.get_set_units(set_name=set_name,model=model,capacity=capacity_unit)
+                                df_unique = pd.DataFrame({set_name: unique_values})
 
-                            df_unique['merge_split'] = ''
-                            df_unique['merge_split_values'] = ''
-                            df_unique['notes'] = ''    
-                            df_unique[sets_to_columns_map[set_name]] = ""
+                                df_unique['merge_split'] = ''
+                                df_unique['merge_split_values'] = ''
+                                df_unique['notes'] = ''    
+                                df_unique[sets_to_columns_map[set_name]] = ""
 
-                            if not units.empty:
-                                df_unique['units'] = ""
-                                df_unique['raw_units'] = ''
-                                df_unique['unit_conversion'] = ''
-                                df_unique['units'] = df_unique[set_name].map(units.iloc[:,0])
-                                df_unique.set_index([set_name, 'units', 'raw_units','unit_conversion'], inplace=True)
-                                df_unique.reset_index(inplace=True)
+                                if not units.empty:
+                                    df_unique['units'] = ""
+                                    df_unique['raw_units'] = ''
+                                    df_unique['unit_conversion'] = ''
+                                    df_unique['units'] = df_unique[set_name].map(units.iloc[:,0])
+                                    df_unique.set_index([set_name, 'units', 'raw_units','unit_conversion'], inplace=True)
+                                    df_unique.reset_index(inplace=True)
 
-                            df_unique.to_excel(writer, sheet_name=set_name, index=False)
+                                df_unique.to_excel(writer, sheet_name=set_name, index=False)
 
                     # Add an empty "files" sheet
                     info_for_export = info.copy()
@@ -186,6 +192,23 @@ class DataHarmonizer:
             self.raw_data[file] = self.raw_data[file].loc[:,columns_to_keep].fillna(0)
             info['metadata'].reset_index(inplace=True)            
 
+        # dealing with tolerances
+        for file in files:
+            for set_name,column_name in self.table_file_map[file]['sets_to_columns_map'].items():
+                if column_name == "_tolerance":
+                    tol_data = self.table_file_map[file]['tolerance'][set_name]
+                    
+                    to_append = pd.DataFrame()
+                    for var,value in tol_data.items():
+                        raw_data_with_tol = self.raw_data[file].copy()
+                        raw_data_with_tol[f"{set_name}{column_name}"] = var
+                        raw_data_with_tol[self.table_file_map[file]["values"]] *= (1+value)
+                        to_append = pd.concat([to_append,raw_data_with_tol],axis=0)
+                    
+                    self.raw_data[file] = pd.concat([self.raw_data[file],to_append],axis=0)
+                    self.raw_data[file] = self.raw_data[file][self.raw_data[file][f"{set_name}{column_name}"].notna()]
+
+
 
     def harmonize_data(
             self,
@@ -206,7 +229,6 @@ class DataHarmonizer:
             print(f"Harmonizing data for {file}")
 
             # Extract mapping for this file
-            # column_mapping = {v:k+"_Name" for k,v in self.table_file_map[file]['sets_to_columns_map'].items()}
             column_mapping = {v:k+"_Name" for k,v in self.table_file_map[file]['sets_to_columns_map'].items()}
             
             value_column_origin = self.table_file_map[file]['values']  # The name of the values column in raw_data
@@ -215,10 +237,14 @@ class DataHarmonizer:
             raw_data_renamed = self.raw_data[file].copy()
             raw_data_renamed = raw_data_renamed.rename(columns=column_mapping)
             raw_data_renamed = raw_data_renamed.rename(columns={value_column_origin: 'values'}).fillna(0)
-            
+            # Replace "_tolerance" with "_Name" in column names
+            raw_data_renamed.columns = [
+                col.replace("_tolerance", "_Name") if "_tolerance" in col else col 
+                for col in raw_data_renamed.columns
+            ]
             
             for set_name,column_name in self.table_file_map[file]['sets_to_columns_map'].items():
-                if set_name != 'metadata':
+                if set_name != 'metadata' and column_name != '_tolerance':
 
                     map_df = self.data_map[file][set_name].copy()
                     # map_df = map_df.drop([c for c in map_df.columns if c not in [column_name,set_name]],axis=1)

@@ -26,6 +26,7 @@ folder/
     - "sets_to_columns_map" (mapping table coordinates with raw data file columns)
     - "values" (mapping the column of raw data file storing values)
     - "path" (reporting the path to the raw data file, excluding the one reported as "main_dir"). N.B. The raw data files, for the moment, must be in flat csv formats
+    - "tolerance" (non mandatory: allows to to map specific labels in a given set with values multiplied by 1 + a given tolerance. The given set should be mapped to "_tolerance" into "sets_to_columns_map")
 
 - Run the main.py script
     - load dependencies and yml files
