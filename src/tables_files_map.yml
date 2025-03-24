@@ -455,11 +455,73 @@ constraints:
       constraints:
         Technology production share | Maximum: 0.05
         Technology production share | Minimum: -0.05
-      
-
-
-
-    
+  Passenger cars capacities (historical):
+    ref_code: r_ESTAT_24_IT_road_eqs_carpda
+    title: Passenger cars, by type of motor energy
+    author: EUROSTAT
+    type: database
+    year: 2024
+    url: https://ec.europa.eu/eurostat/databrowser/view/road_eqs_carpda__custom_12834362/default/table?lang=en
+    path: 'data/_all/r_ESTAT_24_IT_road_eqs/r_ESTAT_24_IT_road_eqs_carpda.csv'
+    sets_to_columns_map:
+      technologies: mot_nrg
+      constraints: _tolerance
+      years: TIME_PERIOD
+    values: OBS_VALUE
+    tolerance:
+      constraints:
+        Operative capacity | Maximum: 0.05
+        Operative capacity | Minimum: -0.05      
+  Trucks capacities (historical):
+    ref_code: r_ESTAT_24_IT_road_eqs_lormot
+    title: Lorries, by type of motor energy
+    author: EUROSTAT
+    type: database
+    year: 2024
+    url: https://ec.europa.eu/eurostat/databrowser/view/road_eqs_lormot__custom_15916356/default/table?lang=en
+    path: 'data/_all/r_ESTAT_24_IT_road_eqs/r_ESTAT_24_IT_road_eqs_lormot.csv'
+    sets_to_columns_map:
+      technologies: mot_nrg
+      constraints: _tolerance
+      years: TIME_PERIOD
+    values: OBS_VALUE
+    tolerance:
+      constraints:
+        Operative capacity | Maximum: 0.05
+        Operative capacity | Minimum: -0.05      
+  DAC capacity (historical):
+    path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_DAC_cap_hist.csv'
+    sets_to_columns_map:
+      technologies: Tech
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Operative capacity | Maximum: 0.0
+        Operative capacity | Minimum: 0.0    
+  Housing mixes (historical):
+    path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_hh_hist.csv'
+    sets_to_columns_map:
+      technologies: Tech
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Technology production share | Maximum: 0.0
+        Technology production share | Minimum: 0.0
+  Biogenic sequestration capacity (historical):
+    path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_LU_cap_hist.csv'
+    sets_to_columns_map:
+      technologies: Tech
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Operative capacity | Maximum: 0.0
+        Operative capacity | Minimum: 0.0      
 
 
 
