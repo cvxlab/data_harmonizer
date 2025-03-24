@@ -21,7 +21,7 @@ with open('src/paths.yml', 'r') as file:
 
 
 #%% Harmonize data
-table = 'constraints' # specifies the table to be harmonized
+table = 'rates' # specifies the table to be harmonized
 
 DH = DataHarmonizer(
     table, 
