@@ -364,7 +364,6 @@ r_C:
       technologies: tech
     values: value
     
-
 r_T:
   transferred_emissions:
     ref_code: 
@@ -394,7 +393,6 @@ r_vu:
       years: year
       technologies: tech
     values: value
-
 
 delays:
   dec_to_cons:
@@ -439,7 +437,25 @@ c:
       years: Year
     values: Converted value
 
-
+constraints:
+  Electricity mixes (historical):
+    ref_code: r_EMBER_25_IT_eedata
+    title: Yearly electricity data
+    author: EMBER
+    type: database
+    year: 2025
+    url: https://ember-climate.org/data-catalogue/yearly-electricity-data/
+    path: 'data/_all/r_EMBER_25_IT_eedata/ee_mix.csv'
+    sets_to_columns_map:
+      technologies: Variable
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Technology production share | Maximum: 0.05
+        Technology production share | Minimum: -0.05
+      
 
 
 
