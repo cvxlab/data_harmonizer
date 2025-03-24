@@ -21,7 +21,7 @@ with open('src/paths.yml', 'r') as file:
 
 
 #%% Harmonize data
-table = 'av_h' # specifies the table to be harmonized
+table = 'tech_info' # specifies the table to be harmonized
 DH = DataHarmonizer(
     table, 
     tables_files_map[table], 
@@ -50,4 +50,4 @@ DH.harmonize_data(
 # %% Export harmonized data
 DH.export()
 
-# %%
+# %% sistemare
