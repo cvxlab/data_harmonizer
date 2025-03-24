@@ -319,6 +319,20 @@ av_h:
       hours: hour
     values: profile
 
+c:
+  All:
+    ref_code: r_SESAM_25_MIMO_capex
+    title: Capital cost coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025
+    url: 'https://polimi365.sharepoint.com/:f:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_capex?csf=1&web=1&e=9ydS5d'
+    path: 'data/_all/r_SESAM_25_IT_MIMO_capex/r_SESAM_25_MIMO_capex.csv'
+    sets_to_columns_map:
+      technologies: Technology
+      costs: Variable
+      years: Year
+    values: Converted value
 
 
 
