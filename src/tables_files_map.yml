@@ -537,11 +537,78 @@ rates:
       years: year
     values: value
 
-
-
-
-
-
-
+tech_info:
+  Lifetime_Operative_Power:
+    ref_code: r_Luke_2024_GNESTE
+    title: The Global and National Energy Systems Techno-Economic (GNESTE) Database - Cost and performance data for electricity generation and storage technologies
+    author: Luke et al.
+    type: database
+    year: 2024
+    url: https://doi.org/10.5281/zenodo.11065566
+    path: 'data/_all/r_Luke_2024_GNESTE/regional_data/Italy/Lifetime_avg.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+    values: Value
+  Lifetime_Financial_Power:
+    ref_code: r_Luke_2024_GNESTE
+    title: The Global and National Energy Systems Techno-Economic (GNESTE) Database - Cost and performance data for electricity generation and storage technologies
+    author: Luke et al.
+    type: database
+    year: 2024
+    url: https://doi.org/10.5281/zenodo.11065566
+    path: 'data/_all/r_Luke_2024_GNESTE/regional_data/Italy/Lifetime_avg.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+    values: Value
+  Lifetime_Others:
+    ref_code: r_SESAM_25_IT_MIMO_lifetimes
+    title: Operational and financial lifetimes of different technologies, excl. Power sector
+    author: SESAM
+    type: database
+    year: 2025
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/lifetimes/r_SESAM_25_IT_MIMO_lifetimes.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+    values: Value
+  Disposal:
+    ref_code: r_SESAM_25_IT_MIMO_dispshape
+    title: Disposal shape factor by technology
+    author: SESAM
+    type: database
+    year: 2025
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/disposal shape factors/r_SESAM_25_IT_MIMO_dispshape.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+    values: Value
+  Availability:
+    ref_code: r_SESAM_25_IT_MIMO_yearlyav
+    title: Min and max availabilities by technology
+    author: SESAM
+    type: database
+    year: 2025
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/availabilities/r_SESAM_25_IT_MIMO_yearlyav.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+    values: Value
+  Storage parameters:
+    ref_code: r_SESAM_25_IT_MIMO_storpar
+    title: Storage parameters by technology
+    author: SESAM
+    type: database
+    year: 2025
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/storage parameters/r_SESAM_25_IT_MIMO_storpar.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+    values: Value
 
 
