@@ -9,7 +9,7 @@ post_harmonization_folder:
   path: 'data/post_harmonization'
 
 empty_model_data_folder: 
-  path: 'model_physical/pyesm_model/input_data_empty'
+  path: 'model_physical/cvxlab_model/input_data_empty'
  
 model_structure: 
   path: 'model_physical/model_structure.xlsx'

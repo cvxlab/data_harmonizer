@@ -21,7 +21,7 @@ with open('src/paths.yml', 'r') as file:
 
 
 #%% Harmonize data
-table = 'tech_info' # specifies the table to be harmonized
+table = 'r_vu' # specifies the table to be harmonized
 
 DH = DataHarmonizer(
     table, 
@@ -44,7 +44,7 @@ DH.parse_mapped_raw_data()
 
 # %% Harmonize the data
 DH.harmonize_data(
-    # files = 'Energy balances'
+    # files = ['Trucks capacities (historical)'],
     # report_missing_values=True,
     )
 
