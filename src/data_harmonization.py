@@ -213,7 +213,6 @@ class DataHarmonizer:
     def harmonize_data(
             self,
             files: list = 'all',
-            report_missing_values = False,
     ):
 
         if self.raw_data == {}:
@@ -321,15 +320,7 @@ class DataHarmonizer:
         self.harmonized_data = harmonized_data
 
 
-        if report_missing_values:
-            missing_values = self.harmonized_data[self.harmonized_data.isna().any(axis=1)]
-            print("Overall missing values %: ", missing_values.shape[0]/self.harmonized_data.shape[0]*100, "%")
-            
-            if missing_values.shape[0] > 0:
-                for column in missing_values.columns:
-                    if column != 'values':
-                        unique_values = missing_values[column].dropna().unique()
-                        print(f"\nUnique values in column '{column}': {unique_values}")
+
 
     def export(
             self,
