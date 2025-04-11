@@ -21,34 +21,34 @@ with open('src/paths.yml', 'r') as file:
 
 
 #%% Harmonize data
-# table = 'r_vu' # specifies the table to be harmonized
+table = 'p_m' # specifies the table to be harmonized
 
-for table in tables_files_map.keys():
-    DH = DataHarmonizer(
-        table, 
-        tables_files_map[table], 
-        main_folder, 
-        pre_harmonization_folder,
-        post_harmonization_folder,
-        empty_model_data_folder,
-        model_structure,
+DH = DataHarmonizer(
+    table, 
+    tables_files_map[table], 
+    main_folder, 
+    pre_harmonization_folder,
+    post_harmonization_folder,
+    empty_model_data_folder,
+    model_structure,
+)
+
+# %% Export empty data map templates
+DH.get_data_map_template()
+
+# %% Read back the data map template filled + re-export it adding merge-split info
+DH.read_data_map_template()
+
+# %% Parse raw data already filtered accoding to the maps
+DH.parse_mapped_raw_data()
+
+# %% Harmonize the data
+DH.harmonize_data(
+    # files = ['Trucks capacities (historical)'],
+    # report_missing_values=True,
     )
 
-    # Export empty data map templates
-    DH.get_data_map_template()
-
-    # Read back the data map template filled + re-export it adding merge-split info
-    DH.read_data_map_template()
-
-    # Parse raw data already filtered accoding to the maps
-    DH.parse_mapped_raw_data()
-
-    # Harmonize the data
-    DH.harmonize_data(
-        # files = ['Trucks capacities (historical)'],
-        )
-
-    # Export harmonized data
-    DH.export()
+# %% Export harmonized data
+DH.export()
 
 # %%

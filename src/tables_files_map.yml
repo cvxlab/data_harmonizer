@@ -409,7 +409,7 @@ delays:
       physical_data: physical
       years: year
     values: value
-    cons_to_ope:
+  cons_to_ope:
     ref_code: r_SESAM_25_IT_MIMO_delays
     title: Technologies' construction to operation delays
     author: SESAM
@@ -422,6 +422,7 @@ delays:
       physical_data: physical
       years: year
     values: value
+
 
 c:
   All:
@@ -621,21 +622,6 @@ tech_info:
     values: Value
 
 c_r:
-  Primary Energy:
-    ref_code: r_SESAM_25_MIMO_envcosts
-    title: Cost of environmental transactions coefficients, MIMO, Italy
-    author: SESAM
-    type: database
-    year: 2025 
-    url: 
-    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
-    sets_to_columns_map:
-      products_env: Products_Env
-      years: Year
-      technologies: Technology
-      costs: Variable
-      scenarios: Scenario
-    values: Converted value
   EU ETS:
     ref_code: r_ICAP_25_EU_ETSprc
     title: ICAP Allowance Price Explorer
@@ -651,3 +637,68 @@ c_r:
       costs: Cost
       scenarios: Scenario
     values: Price
+
+p_m:
+  All:
+    ref_code: r_SESAM_25_MIMO_envcosts
+    title: Cost of environmental transactions coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
+    sets_to_columns_map:
+      products: Products_Env
+      years: Year
+      sectors: Technology
+      costs: Variable
+      # scenarios: Scenario
+    values: Converted value
+
+c_var_op:
+  All:
+    ref_code: r_SESAM_25_MIMO_envcosts
+    title: Cost of environmental transactions coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
+    sets_to_columns_map:
+      years: Year
+      technologies: Technology
+      costs: Variable
+      # scenarios: Scenario
+    values: Converted value
+
+c_fix_op:
+  All:
+    ref_code: r_SESAM_25_MIMO_envcosts
+    title: Cost of environmental transactions coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
+    sets_to_columns_map:
+      years: Year
+      technologies: Technology
+      costs: Variable
+      # scenarios: Scenario
+    values: Converted value
+
+X_e:
+  All:
+    ref_code: r_SESAM_25_MIMO_envcosts
+    title: Cost of environmental transactions coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
+    sets_to_columns_map:
+      years: Year
+      technologies: Technology
+      costs: Variable
+      # scenarios: Scenario
+    values: Converted value
