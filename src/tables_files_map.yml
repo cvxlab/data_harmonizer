@@ -349,6 +349,22 @@ r_v:
       products: fuel_name
       scenarios: scenario_name
     values: value
+
+r_v_ex:
+  emission_factors_by_prod:
+    ref_code: r_SESAM_25_IT_MIMO_rv
+    title: Emission factors by product
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_rv/emissions_by_prod.csv'
+    sets_to_columns_map:
+      products_env: prod_env
+      years: year
+      products: fuel_name
+      scenarios: scenario_name
+    values: value
     
 r_C:
   carbon_capture_efficiency:
@@ -457,8 +473,8 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Technology production share | Maximum: 0.05
-        Technology production share | Minimum: -0.05
+        Technology production share | Maximum: 1
+        Technology production share | Minimum: -1
   Passenger cars capacities (historical):
     ref_code: r_ESTAT_24_IT_road_eqs_carpda
     title: Passenger cars, by type of motor energy
@@ -476,8 +492,8 @@ constraints:
     values: OBS_VALUE
     tolerance:
       constraints:
-        Operative capacity | Maximum: 0.05
-        Operative capacity | Minimum: -0.05      
+        Operative capacity | Maximum: 1
+        Operative capacity | Minimum: -1      
   Trucks capacities (historical):
     ref_code: r_ESTAT_24_IT_road_eqs_lormot
     title: Lorries, by type of motor energy
@@ -494,8 +510,8 @@ constraints:
     values: OBS_VALUE
     tolerance:
       constraints:
-        Operative capacity | Maximum: 0.05
-        Operative capacity | Minimum: -0.05      
+        Operative capacity | Maximum: 1
+        Operative capacity | Minimum: -1      
   DAC capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_DAC_cap_hist.csv'
     sets_to_columns_map:
@@ -506,8 +522,8 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Operative capacity | Maximum: 0.0
-        Operative capacity | Minimum: 0.0    
+        Operative capacity | Maximum: 1
+        Operative capacity | Minimum: -1    
   Housing mixes (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_hh_hist.csv'
     sets_to_columns_map:
@@ -518,8 +534,8 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Technology production share | Maximum: 0.0
-        Technology production share | Minimum: 0.0
+        Technology production share | Maximum: 1
+        Technology production share | Minimum: -1
   Biogenic sequestration capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_LU_cap_hist.csv'
     sets_to_columns_map:
@@ -530,8 +546,8 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Operative capacity | Maximum: 0.0
-        Operative capacity | Minimum: 0.0      
+        Operative capacity | Maximum: 1
+        Operative capacity | Minimum: -1      
 
 rates:
   All:
@@ -620,7 +636,18 @@ tech_info:
       physical_data: Variable
       technologies: Technology
     values: Value
-
+  Capacity to activity:
+    ref_code: r_SESAM_25_IT_MIMO_captoact
+    title: Capacity to activity parameters
+    author: SESAM
+    type: database
+    year: 2025
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/cap_to_act/r_SESAM_25_IT_MIMO_captoact.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+    values: Value
 c_r:
   EU ETS:
     ref_code: r_ICAP_25_EU_ETSprc
