@@ -476,60 +476,60 @@ constraints:
           technologies:
             Coal: 
               type: "abs"
-              amount: 0
+              amount: 1
             Gas:
               type: "abs"
-              amount: 0
+              amount: 1
             Other Fossil:
               type: "abs"
-              amount: 0
+              amount: 1
             Nuclear:
               type: "abs"
-              amount: 0
+              amount: 1
             Bioenergy:
               type: "abs"
-              amount: 0
+              amount: 1
             Hydro:
               type: "abs"
-              amount: 0
+              amount: 1
             Solar:
               type: "abs"
-              amount: 0
+              amount: 1
             Wind:
               type: "abs"
-              amount: 0
+              amount: 1
             Other Renewables:
               type: "abs"
-              amount: 0
+              amount: 1
         Technology production share | Minimum:
           technologies:
             Coal: 
               type: "abs"
-              amount: -0
+              amount: -1
             Gas:
               type: "abs"
-              amount: -0
+              amount: -1
             Other Fossil:
               type: "abs"
-              amount: -0
+              amount: -1
             Nuclear:
               type: "abs"
-              amount: -0
+              amount: -1
             Bioenergy:
               type: "abs"
-              amount: -0
+              amount: -1
             Hydro:
               type: "abs"
-              amount: -0
+              amount: -1
             Solar:
               type: "abs"
-              amount: -0
+              amount: -1
             Wind:
               type: "abs"
-              amount: -0
+              amount: -1
             Other Renewables:
               type: "abs"
-              amount: -0
+              amount: -1
   Passenger cars capacities (historical):
     ref_code: r_ESTAT_24_IT_road_eqs_carpda
     title: Passenger cars, by type of motor energy
