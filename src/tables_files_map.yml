@@ -349,6 +349,22 @@ r_v:
       products: fuel_name
       scenarios: scenario_name
     values: value
+
+r_v_ex:
+  emission_factors_by_prod:
+    ref_code: r_SESAM_25_IT_MIMO_rv
+    title: Emission factors by product
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_rv/emissions_by_prod.csv'
+    sets_to_columns_map:
+      products_env: prod_env
+      years: year
+      products: fuel_name
+      scenarios: scenario_name
+    values: value
     
 r_C:
   carbon_capture_efficiency:
@@ -409,7 +425,7 @@ delays:
       physical_data: physical
       years: year
     values: value
-    cons_to_ope:
+  cons_to_ope:
     ref_code: r_SESAM_25_IT_MIMO_delays
     title: Technologies' construction to operation delays
     author: SESAM
@@ -456,8 +472,8 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Technology production share | Maximum: 0.05
-        Technology production share | Minimum: -0.05
+        Technology production share | Maximum: 1
+        Technology production share | Minimum: -1
   Passenger cars capacities (historical):
     ref_code: r_ESTAT_24_IT_road_eqs_carpda
     title: Passenger cars, by type of motor energy
@@ -475,8 +491,8 @@ constraints:
     values: OBS_VALUE
     tolerance:
       constraints:
-        Operative capacity | Maximum: 0.05
-        Operative capacity | Minimum: -0.05      
+        Operative capacity | Maximum: 1
+        Operative capacity | Minimum: -1      
   Trucks capacities (historical):
     ref_code: r_ESTAT_24_IT_road_eqs_lormot
     title: Lorries, by type of motor energy
@@ -493,8 +509,8 @@ constraints:
     values: OBS_VALUE
     tolerance:
       constraints:
-        Operative capacity | Maximum: 0.05
-        Operative capacity | Minimum: -0.05      
+        Operative capacity | Maximum: 0.2
+        Operative capacity | Minimum: -0.9     
   DAC capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_DAC_cap_hist.csv'
     sets_to_columns_map:
@@ -505,8 +521,8 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Operative capacity | Maximum: 0.0
-        Operative capacity | Minimum: 0.0    
+        Operative capacity | Maximum: 1
+        Operative capacity | Minimum: -1    
   Housing mixes (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_hh_hist.csv'
     sets_to_columns_map:
@@ -517,8 +533,20 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Technology production share | Maximum: 0.0
-        Technology production share | Minimum: 0.0
+        Technology production share | Maximum: 1
+        Technology production share | Minimum: -1
+  Freight transport mixes (historical):
+    path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_trucks_h.csv'
+    sets_to_columns_map:
+      technologies: Tech
+      scenarios: Scenario
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Technology production share | Maximum: 0
+        Technology production share | Minimum: 0  
   Biogenic sequestration capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_LU_cap_hist.csv'
     sets_to_columns_map:
@@ -529,8 +557,8 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Operative capacity | Maximum: 0.0
-        Operative capacity | Minimum: 0.0      
+        Operative capacity | Maximum: 1
+        Operative capacity | Minimum: -1      
 
 rates:
   All:
@@ -619,23 +647,20 @@ tech_info:
       physical_data: Variable
       technologies: Technology
     values: Value
-
-c_r:
-  Primary Energy:
-    ref_code: r_SESAM_25_MIMO_envcosts
-    title: Cost of environmental transactions coefficients, MIMO, Italy
+  Capacity to activity:
+    ref_code: r_SESAM_25_IT_MIMO_captoact
+    title: Capacity to activity parameters
     author: SESAM
     type: database
-    year: 2025 
+    year: 2025
     url: 
-    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/cap_to_act/r_SESAM_25_IT_MIMO_captoact.csv'
     sets_to_columns_map:
-      products_env: Products_Env
-      years: Year
+      physical_data: Variable
       technologies: Technology
-      costs: Variable
-      scenarios: Scenario
-    values: Converted value
+    values: Value
+
+c_r:
   EU ETS:
     ref_code: r_ICAP_25_EU_ETSprc
     title: ICAP Allowance Price Explorer
@@ -651,3 +676,68 @@ c_r:
       costs: Cost
       scenarios: Scenario
     values: Price
+
+p_m:
+  All:
+    ref_code: r_SESAM_25_MIMO_envcosts
+    title: Cost of environmental transactions coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
+    sets_to_columns_map:
+      products: Products_Env
+      years: Year
+      sectors: Technology
+      costs: Variable
+      # scenarios: Scenario
+    values: Converted value
+
+c_var_op:
+  All:
+    ref_code: r_SESAM_25_MIMO_envcosts
+    title: Cost of environmental transactions coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
+    sets_to_columns_map:
+      years: Year
+      technologies: Technology
+      costs: Variable
+      # scenarios: Scenario
+    values: Converted value
+
+c_fix_op:
+  All:
+    ref_code: r_SESAM_25_MIMO_envcosts
+    title: Cost of environmental transactions coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
+    sets_to_columns_map:
+      years: Year
+      technologies: Technology
+      costs: Variable
+      # scenarios: Scenario
+    values: Converted value
+
+X_e:
+  All:
+    ref_code: r_SESAM_25_MIMO_envcosts
+    title: Cost of environmental transactions coefficients, MIMO, Italy
+    author: SESAM
+    type: database
+    year: 2025 
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_costs_other/r_SESAM_25_MIMO_envcosts.csv'
+    sets_to_columns_map:
+      years: Year
+      technologies: Technology
+      costs: Variable
+      # scenarios: Scenario
+    values: Converted value
