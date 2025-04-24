@@ -200,11 +200,45 @@ class DataHarmonizer:
                     
                     to_append = pd.DataFrame()
                     for var,value in tol_data.items():
+
                         raw_data_with_tol = self.raw_data[file].copy()
                         raw_data_with_tol[f"{set_name}{column_name}"] = var
-                        raw_data_with_tol[self.table_file_map[file]["values"]] *= (1+value)
-                        to_append = pd.concat([to_append,raw_data_with_tol],axis=0)
-                    
+
+                        keys_in_sets = []
+                        for key in value.keys():
+                            if key in self.table_file_map[file]['sets_to_columns_map']:
+                                keys_in_sets.append(key)
+
+                        if keys_in_sets == []:
+                            if "type" not in value.keys():
+                                raise ValueError(f"Tolerance for {var} in {file} is not properly defined: type missing")
+                            if "amount" not in value.keys():
+                                raise ValueError(f"Tolerance for {var} in {file} is not properly defined: amount missing")
+                                                        
+                            if value['type'] == 'absolute' or value['type'] == 'abs':
+                                raw_data_with_tol[self.table_file_map[file]["values"]] += value['amount']
+                            if value['type'] == 'relative' or value['type'] == 'rel':
+                                raw_data_with_tol[self.table_file_map[file]["values"]] *= (1+value['amount'])
+                            to_append = pd.concat([to_append,raw_data_with_tol],axis=0)
+
+                        else:
+                            for key in keys_in_sets:
+                                for item in value[key]:
+                                    if item not in self.data_map[file][key][self.table_file_map[file]['sets_to_columns_map'][key]].values:
+                                        raise ValueError(f"Tolerance for {var} in {file} is not properly defined: {item} not found in {key} set")
+                                    if "type" not in value[key][item].keys():
+                                        raise ValueError(f"Tolerance for {var} in {file} is not properly defined: type missing for {item} in {key} set")
+                                    if "amount" not in value[key][item].keys():
+                                        raise ValueError(f"Tolerance for {var} in {file} is not properly defined: amount missing for {item} in {key} set")
+                                    
+                                    if value[key][item]['type'] == 'absolute' or value[key][item]['type'] == 'abs':
+                                        raw_data_with_tol.loc[raw_data_with_tol[self.table_file_map[file]['sets_to_columns_map'][key]] == item, self.table_file_map[file]["values"]] += value[key][item]['amount']
+                                    if value[key][item]['type'] == 'relative' or value[key][item]['type'] == 'rel':
+                                        raw_data_with_tol.loc[raw_data_with_tol[self.table_file_map[file]['sets_to_columns_map'][key]] == item, self.table_file_map[file]["values"]] *= (1+value[key][item]['amount'])
+
+
+                                    to_append = pd.concat([to_append,raw_data_with_tol.loc[raw_data_with_tol[self.table_file_map[file]['sets_to_columns_map'][key]] == item,:]],axis=0)
+                        
                     self.raw_data[file] = pd.concat([self.raw_data[file],to_append],axis=0)
                     self.raw_data[file] = self.raw_data[file][self.raw_data[file][f"{set_name}{column_name}"].notna()]
 
