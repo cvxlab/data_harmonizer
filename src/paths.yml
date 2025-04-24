@@ -1,12 +1,13 @@
 main_folder:
   LR: '/Users/lorenzorinaldi/Library/CloudStorage/OneDrive-SharedLibraries-PolitecnicodiMilano/DENG-PRIN-MIMO - Documents/Models'
   VB: '/Users/baioc/Politecnico di Milano/DENG-PRIN-MIMO - Documenti/Models'
+  DG: '/Users/debor/Politecnico di Milano/DENG-PRIN-MIMO - Documenti/Models'
 
 pre_harmonization_folder:
   path: 'data/pre_harmonization'
 
 post_harmonization_folder:
-  path: 'data/post_harmonization'
+  path: 'model_physical/cvxlab_model/input_data'
 
 empty_model_data_folder: 
   path: 'model_physical/cvxlab_model/input_data_empty'

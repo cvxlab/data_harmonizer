@@ -20,8 +20,8 @@ with open('src/paths.yml', 'r') as file:
     empty_model_data_folder = paths['empty_model_data_folder']['path']
 
 
-#%% Harmonize data
-table = 'r_v_ex' # specifies the table to be harmonized
+#%% Harmonize single data table
+table = 'constraints' # specifies the table to be harmonized
 
 DH = DataHarmonizer(
     table, 
@@ -44,14 +44,22 @@ DH.parse_mapped_raw_data()
 
 # %% Harmonize the data
 DH.harmonize_data(
-    # files = ['Trucks capacities (historical)'],
-    # report_missing_values=True,
+    # files = [
+    #     'Electricity mixes (historical)',
+    #     'Passenger cars capacities (historical)',
+    #     'Trucks capacities (historical)',
+    #     'DAC capacity (historical)',
+    #     'Housing mixes (historical)',
+    #     'Biogenic sequestration capacity (historical)',
+    # ],
     )
 
 # %% Export harmonized data
 DH.export()
 
-#%% Harmonize data
+
+
+#%% Harmonize all data
 
 for table in tables_files_map.keys():
     if table not in ['X_e','e']:
@@ -77,10 +85,7 @@ for table in tables_files_map.keys():
         DH.parse_mapped_raw_data()
 
         # Harmonize the data
-        DH.harmonize_data(
-            # files = ['Trucks capacities (historical)'],
-            # report_missing_values=True,
-            )
+        DH.harmonize_data()
 
         # Export harmonized data
         DH.export()

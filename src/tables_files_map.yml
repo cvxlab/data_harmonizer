@@ -439,7 +439,6 @@ delays:
       years: year
     values: value
 
-
 c:
   All:
     ref_code: r_SESAM_25_MIMO_capex
@@ -510,8 +509,8 @@ constraints:
     values: OBS_VALUE
     tolerance:
       constraints:
-        Operative capacity | Maximum: 1
-        Operative capacity | Minimum: -1      
+        Operative capacity | Maximum: 0.2
+        Operative capacity | Minimum: -0.9     
   DAC capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_DAC_cap_hist.csv'
     sets_to_columns_map:
@@ -536,6 +535,18 @@ constraints:
       constraints:
         Technology production share | Maximum: 1
         Technology production share | Minimum: -1
+  Freight transport mixes (historical):
+    path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_trucks_h.csv'
+    sets_to_columns_map:
+      technologies: Tech
+      scenarios: Scenario
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Technology production share | Maximum: 0
+        Technology production share | Minimum: 0  
   Biogenic sequestration capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_LU_cap_hist.csv'
     sets_to_columns_map:
@@ -648,6 +659,7 @@ tech_info:
       physical_data: Variable
       technologies: Technology
     values: Value
+
 c_r:
   EU ETS:
     ref_code: r_ICAP_25_EU_ETSprc
