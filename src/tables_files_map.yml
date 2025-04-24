@@ -472,8 +472,64 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Technology production share | Maximum: 1
-        Technology production share | Minimum: -1
+        Technology production share | Maximum: 
+          technologies:
+            Coal: 
+              type: "abs"
+              amount: 0
+            Gas:
+              type: "abs"
+              amount: 0
+            Other Fossil:
+              type: "abs"
+              amount: 0
+            Nuclear:
+              type: "abs"
+              amount: 0
+            Bioenergy:
+              type: "abs"
+              amount: 0
+            Hydro:
+              type: "abs"
+              amount: 0
+            Solar:
+              type: "abs"
+              amount: 0
+            Wind:
+              type: "abs"
+              amount: 0
+            Other Renewables:
+              type: "abs"
+              amount: 0
+        Technology production share | Minimum:
+          technologies:
+            Coal: 
+              type: "abs"
+              amount: -0
+            Gas:
+              type: "abs"
+              amount: -0
+            Other Fossil:
+              type: "abs"
+              amount: -0
+            Nuclear:
+              type: "abs"
+              amount: -0
+            Bioenergy:
+              type: "abs"
+              amount: -0
+            Hydro:
+              type: "abs"
+              amount: -0
+            Solar:
+              type: "abs"
+              amount: -0
+            Wind:
+              type: "abs"
+              amount: -0
+            Other Renewables:
+              type: "abs"
+              amount: -0
   Passenger cars capacities (historical):
     ref_code: r_ESTAT_24_IT_road_eqs_carpda
     title: Passenger cars, by type of motor energy
@@ -491,8 +547,12 @@ constraints:
     values: OBS_VALUE
     tolerance:
       constraints:
-        Operative capacity | Maximum: 1
-        Operative capacity | Minimum: -1      
+        Operative capacity | Maximum: 
+          type: "rel"
+          amount: 1
+        Operative capacity | Minimum: 
+          type: "rel"
+          amount: -1      
   Trucks capacities (historical):
     ref_code: r_ESTAT_24_IT_road_eqs_lormot
     title: Lorries, by type of motor energy
@@ -509,8 +569,12 @@ constraints:
     values: OBS_VALUE
     tolerance:
       constraints:
-        Operative capacity | Maximum: 0.2
-        Operative capacity | Minimum: -0.9     
+        Operative capacity | Maximum:
+          type: "rel"
+          amount: 0.2
+        Operative capacity | Minimum:
+          type: "rel"
+          amount: -0.9    
   DAC capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_DAC_cap_hist.csv'
     sets_to_columns_map:
@@ -521,8 +585,12 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Operative capacity | Maximum: 1
-        Operative capacity | Minimum: -1    
+        Operative capacity | Maximum:
+          type: "rel"
+          amount: 1
+        Operative capacity | Minimum:
+          type: "rel"
+          amount: -1    
   Housing mixes (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_hh_hist.csv'
     sets_to_columns_map:
@@ -533,8 +601,12 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Technology production share | Maximum: 1
-        Technology production share | Minimum: -1
+        Technology production share | Maximum:
+          type: "rel"
+          amount: 1
+        Technology production share | Minimum: 
+          type: "rel"
+          amount: -1
   Freight transport mixes (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_trucks_h.csv'
     sets_to_columns_map:
@@ -545,8 +617,12 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Technology production share | Maximum: 0
-        Technology production share | Minimum: 0  
+        Technology production share | Maximum: 
+          type: "rel"
+          amount: 0
+        Technology production share | Minimum: 
+          type: "rel"
+          amount: -1  
   Biogenic sequestration capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_LU_cap_hist.csv'
     sets_to_columns_map:
@@ -557,8 +633,12 @@ constraints:
     values: Value
     tolerance:
       constraints:
-        Operative capacity | Maximum: 1
-        Operative capacity | Minimum: -1      
+        Operative capacity | Maximum: 
+          type: "rel"
+          amount: 1
+        Operative capacity | Minimum: 
+          type: "rel"
+          amount: -1      
 
 rates:
   All:

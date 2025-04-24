@@ -55,7 +55,7 @@ DH.harmonize_data(
     )
 
 # %% Export harmonized data
-DH.export()
+DH.export(path="test.xlsx")
 
 
 
