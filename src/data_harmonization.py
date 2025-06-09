@@ -122,17 +122,19 @@ class DataHarmonizer:
 
     def read_data_map_template(
             self,
+            hmap_name: str = 'hmap.xlsx',
             files:list = 'all',
     ):
         
         if files == 'all':
             files = os.listdir(os.path.join(self.main_dir, self.pre_harmonization_dir, self.table))
             files = [f for f in files if f != ".DS_Store"] # remove hidden files
+            files = [f for f in files if f in self.table_file_map.keys()]
         
         maps = {}
         for file in files:
             print(f"Reading data map for {file}")
-            maps[file] = pd.read_excel(os.path.join(self.main_dir, self.pre_harmonization_dir, self.table, file, 'hmap.xlsx'), sheet_name=None)
+            maps[file] = pd.read_excel(os.path.join(self.main_dir, self.pre_harmonization_dir, self.table, file, hmap_name), sheet_name=None)
             for sheet_name in maps[file]:
                 if sheet_name in self.table_file_map[file]['sets_to_columns_map']:
                     maps[file][sheet_name] = maps[file][sheet_name].dropna(axis=0, how='all', subset=maps[file][sheet_name].columns[1:])
@@ -291,7 +293,7 @@ class DataHarmonizer:
 
                     # raw_data_renamed[set_name+"_Name"] = raw_data_renamed[set_name+"_Name"].map(map_df[set_name])
                     if set_name == 'years':
-                        map_df['years_Name'] = map_df['years'].astype('float').astype('int64')
+                        map_df['years_Name'] = map_df['years_Name'].astype('float').astype('int64')
                     raw_data_renamed = raw_data_renamed.merge(map_df, on=set_name+"_Name", how='left')
 
                     # converting unit of measure of the values column according to unit_conversion column

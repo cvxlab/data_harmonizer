@@ -12,6 +12,7 @@ with open('src/tables_files_map.yml', 'r') as file:
 
 # Load the paths from the YAML file
 with open('src/paths.yml', 'r') as file:
+    
     paths = yaml.safe_load(file)
     main_folder = paths['main_folder'][user]
     pre_harmonization_folder = paths['pre_harmonization_folder']['path']
@@ -21,7 +22,7 @@ with open('src/paths.yml', 'r') as file:
 
 
 #%% Harmonize single data table
-table = 'constraints' # specifies the table to be harmonized
+table = 'E_hist_ex' # specifies the table to be harmonized
 
 DH = DataHarmonizer(
     table, 
@@ -37,7 +38,7 @@ DH = DataHarmonizer(
 DH.get_data_map_template()
 
 # %% Read back the data map template filled + re-export it adding merge-split info
-DH.read_data_map_template()
+DH.read_data_map_template(hmap_name='hmap.xlsx')
 
 # %% Parse raw data already filtered accoding to the maps
 DH.parse_mapped_raw_data()
@@ -45,18 +46,21 @@ DH.parse_mapped_raw_data()
 # %% Harmonize the data
 DH.harmonize_data(
     # files = [
-    #     'Electricity mixes (historical)',
-    #     'Passenger cars capacities (historical)',
-    #     'Trucks capacities (historical)',
-    #     'DAC capacity (historical)',
-    #     'Housing mixes (historical)',
-    #     'Biogenic sequestration capacity (historical)',
-    # ],
+        # 'Model specific', 
+        # 'Electricity', 
+        # 'Residential housing', 
+        # 'Non-residential housing', 
+        # 'Hydrogen', 
+        # 'Steel', 
+        # 'Cement', 
+        # 'Transport', 
+        # 'Uranium and mining', 
+        # 'Refineries'
+        # ],
     )
 
 # %% Export harmonized data
 DH.export(path="test.xlsx")
-
 
 
 #%% Harmonize all data
@@ -79,7 +83,7 @@ for table in tables_files_map.keys():
         DH.get_data_map_template()
 
         # Read back the data map template filled + re-export it adding merge-split info
-        DH.read_data_map_template()
+        DH.read_data_map_template(hmap_name='hmap_eng.xlsx')
 
         # Parse raw data already filtered accoding to the maps
         DH.parse_mapped_raw_data()
