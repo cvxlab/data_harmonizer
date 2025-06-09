@@ -412,27 +412,14 @@ r_vu:
     values: value
 
 delays:
-  dec_to_cons:
+  All:
     ref_code: r_SESAM_25_IT_MIMO_delays
     title: Technologies' decision to construction delays
     author: SESAM
     type: database
     year: 2025
     url:
-    path: 'data/_all/r_SESAM_25_IT_MIMO_delays/dec_to_cons.csv'
-    sets_to_columns_map:
-      technologies: techs
-      physical_data: physical
-      years: year
-    values: value
-  cons_to_ope:
-    ref_code: r_SESAM_25_IT_MIMO_delays
-    title: Technologies' construction to operation delays
-    author: SESAM
-    type: database
-    year: 2025
-    url:
-    path: 'data/_all/r_SESAM_25_IT_MIMO_delays/cons_to_ope.csv'
+    path: 'data/_all/r_SESAM_25_IT_MIMO_delays/delays.csv'
     sets_to_columns_map:
       technologies: techs
       physical_data: physical
@@ -473,71 +460,74 @@ constraints:
     tolerance:
       constraints:
         Technology production share | Maximum: 
-          technologies:
-            Coal: 
-              type: "abs"
-              amount: 1
-            Gas:
-              type: "abs"
-              amount: 1
-            Other Fossil:
-              type: "abs"
-              amount: 1
-            Nuclear:
-              type: "abs"
-              amount: 1
-            Bioenergy:
-              type: "abs"
-              amount: 1
-            Hydro:
-              type: "abs"
-              amount: 1
-            Solar:
-              type: "abs"
-              amount: 1
-            Wind:
-              type: "abs"
-              amount: 1
-            Other Renewables:
-              type: "abs"
-              amount: 1
+          type: "rel"
+          amount: 0
         Technology production share | Minimum:
-          technologies:
-            Coal: 
-              type: "abs"
-              amount: -1
-            Gas:
-              type: "abs"
-              amount: -1
-            Other Fossil:
-              type: "abs"
-              amount: -1
-            Nuclear:
-              type: "abs"
-              amount: -1
-            Bioenergy:
-              type: "abs"
-              amount: -1
-            Hydro:
-              type: "abs"
-              amount: -1
-            Solar:
-              type: "abs"
-              amount: -1
-            Wind:
-              type: "abs"
-              amount: -1
-            Other Renewables:
-              type: "abs"
-              amount: -1
-  Passenger cars capacities (historical):
+          type: "rel"
+          amount: 0
+  Steel mixes (historical):
+    path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_steel.csv'
+    sets_to_columns_map:
+      technologies: Tech
+      scenarios: Scenario
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Technology production share | Maximum:
+          type: "abs"
+          amount: 0
+        Technology production share | Minimum: 
+          type: "abs"
+          amount: 0
+  Cement mixes (historical):
+    path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_cem.csv'
+    sets_to_columns_map:
+      technologies: Tech
+      scenarios: Scenario
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Technology production share | Maximum:
+          type: "abs"
+          amount: 0
+        Technology production share | Minimum: 
+          type: "abs"
+          amount: 0
+  # Passenger cars capacities (historical):
+  #   ref_code: r_ESTAT_24_IT_road_eqs_carpda
+  #   title: Passenger cars, by type of motor energy
+  #   author: EUROSTAT
+  #   type: database
+  #   year: 2024
+  #   url: https://ec.europa.eu/eurostat/databrowser/view/road_eqs_carpda__custom_12834362/default/table?lang=en
+  #   path: 'data/_all/r_ESTAT_24_IT_road_eqs/r_ESTAT_24_IT_road_eqs_carpda.csv'
+  #   sets_to_columns_map:
+  #     technologies: mot_nrg
+  #     scenarios: Scenario
+  #     constraints: _tolerance
+  #     years: TIME_PERIOD
+  #     scenarios: Scenario
+  #   values: OBS_VALUE
+  #   tolerance:
+  #     constraints:
+  #       Operative capacity | Maximum:
+  #         type: "rel"
+  #         amount: 0.05
+  #       Operative capacity | Minimum:
+  #         type: "rel"
+  #         amount: -0.05
+  Passenger cars mixes (historical):
     ref_code: r_ESTAT_24_IT_road_eqs_carpda
     title: Passenger cars, by type of motor energy
     author: EUROSTAT
     type: database
     year: 2024
     url: https://ec.europa.eu/eurostat/databrowser/view/road_eqs_carpda__custom_12834362/default/table?lang=en
-    path: 'data/_all/r_ESTAT_24_IT_road_eqs/r_ESTAT_24_IT_road_eqs_carpda.csv'
+    path: 'data/_all/r_ESTAT_24_IT_road_eqs/r_ESTAT_24_IT_road_eqs_carpda_mix.csv'
     sets_to_columns_map:
       technologies: mot_nrg
       scenarios: Scenario
@@ -547,20 +537,42 @@ constraints:
     values: OBS_VALUE
     tolerance:
       constraints:
-        Operative capacity | Maximum: 
-          type: "rel"
-          amount: 1
-        Operative capacity | Minimum: 
-          type: "rel"
-          amount: -1      
-  Trucks capacities (historical):
+        Technology production share | Maximum: 
+          type: "abs"
+          amount: 0
+        Technology production share | Minimum:
+          type: "abs"
+          amount: 0
+  # Trucks capacities (historical):
+  #   ref_code: r_ESTAT_24_IT_road_eqs_lormot
+  #   title: Lorries, by type of motor energy
+  #   author: EUROSTAT
+  #   type: database
+  #   year: 2024
+  #   url: https://ec.europa.eu/eurostat/databrowser/view/road_eqs_lormot__custom_15916356/default/table?lang=en
+  #   path: 'data/_all/r_ESTAT_24_IT_road_eqs/r_ESTAT_24_IT_road_eqs_lormot.csv'
+  #   sets_to_columns_map:
+  #     technologies: mot_nrg
+  #     scenarios: Scenario
+  #     constraints: _tolerance
+  #     years: TIME_PERIOD
+  #   values: OBS_VALUE
+  #   tolerance:
+  #     constraints:
+  #       Operative capacity | Maximum:
+  #         type: "abs"
+  #         amount: 0
+  #       Operative capacity | Minimum:
+  #         type: "abs"
+  #         amount: 0
+  Trucks mixes (historical):
     ref_code: r_ESTAT_24_IT_road_eqs_lormot
     title: Lorries, by type of motor energy
     author: EUROSTAT
     type: database
     year: 2024
     url: https://ec.europa.eu/eurostat/databrowser/view/road_eqs_lormot__custom_15916356/default/table?lang=en
-    path: 'data/_all/r_ESTAT_24_IT_road_eqs/r_ESTAT_24_IT_road_eqs_lormot.csv'
+    path: 'data/_all/r_ESTAT_24_IT_road_eqs/r_ESTAT_24_IT_road_eqs_lormot_mix.csv'
     sets_to_columns_map:
       technologies: mot_nrg
       scenarios: Scenario
@@ -569,12 +581,12 @@ constraints:
     values: OBS_VALUE
     tolerance:
       constraints:
-        Operative capacity | Maximum:
-          type: "rel"
-          amount: 0.2
-        Operative capacity | Minimum:
-          type: "rel"
-          amount: -0.9    
+        Technology production share | Maximum: 
+          type: "abs"
+          amount: 0
+        Technology production share | Minimum:
+          type: "abs"
+          amount: 0
   DAC capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_DAC_cap_hist.csv'
     sets_to_columns_map:
@@ -586,11 +598,50 @@ constraints:
     tolerance:
       constraints:
         Operative capacity | Maximum:
+          type: "abs"
+          amount: 0
+        Operative capacity | Minimum:
+          type: "abs"
+          amount: 0
+  Maximum power capacity (historical):
+    path: 'data/_all/r_EMBER_25_IT_eedata/cap_op.csv'
+    sets_to_columns_map:
+      technologies: Variable
+      scenarios: Scenario
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Operative capacity | Maximum:
           type: "rel"
-          amount: 1
+          amount: 0.1
+  Minimum power capacity (historical):
+    path: 'data/_all/r_EMBER_25_IT_eedata/cap_op.csv'
+    sets_to_columns_map:
+      technologies: Variable
+      scenarios: Scenario
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
         Operative capacity | Minimum:
           type: "rel"
-          amount: -1    
+          amount: 0
+  Power capacity (model):
+    path: 'data/_all/r_EMBER_25_IT_eedata/cap_op.csv'
+    sets_to_columns_map:
+      technologies: Variable
+      scenarios: Scenario
+      constraints: _tolerance
+      years: Year
+    values: Value
+    tolerance:
+      constraints:
+        Operative capacity | Maximum:
+          type: "rel"
+          amount: 0.5 
   Housing mixes (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_hh_hist.csv'
     sets_to_columns_map:
@@ -602,27 +653,11 @@ constraints:
     tolerance:
       constraints:
         Technology production share | Maximum:
-          type: "rel"
-          amount: 1
-        Technology production share | Minimum: 
-          type: "rel"
-          amount: -1
-  Freight transport mixes (historical):
-    path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_mix_trucks_h.csv'
-    sets_to_columns_map:
-      technologies: Tech
-      scenarios: Scenario
-      constraints: _tolerance
-      years: Year
-    values: Value
-    tolerance:
-      constraints:
-        Technology production share | Maximum: 
-          type: "rel"
+          type: "abs"
           amount: 0
         Technology production share | Minimum: 
-          type: "rel"
-          amount: -1  
+          type: "abs"
+          amount: 0
   Biogenic sequestration capacity (historical):
     path: 'data/_all/r_SESAM_25_IT_MIMO_min-max/values/r_SESAM_25_IT_MIMO_LU_cap_hist.csv'
     sets_to_columns_map:
@@ -634,11 +669,11 @@ constraints:
     tolerance:
       constraints:
         Operative capacity | Maximum: 
-          type: "rel"
-          amount: 1
+          type: "abs"
+          amount: 0
         Operative capacity | Minimum: 
-          type: "rel"
-          amount: -1      
+          type: "abs"
+          amount: 0
 
 rates:
   All:
@@ -653,6 +688,21 @@ rates:
       economic_data: rate
       years: year
     values: value
+
+av_y:
+  All:
+    ref_code: r_SESAM_25_IT_MIMO_yearlyav
+    title: Min and max availabilities by technology
+    author: SESAM
+    type: database
+    year: 2025
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/availabilities/r_SESAM_25_IT_MIMO_yearlyav.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+      years: Year
+    values: Value
 
 tech_info:
   Lifetime_Operative_Power:
@@ -703,18 +753,6 @@ tech_info:
       physical_data: Variable
       technologies: Technology
     values: Value
-  Availability:
-    ref_code: r_SESAM_25_IT_MIMO_yearlyav
-    title: Min and max availabilities by technology
-    author: SESAM
-    type: database
-    year: 2025
-    url: 
-    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/availabilities/r_SESAM_25_IT_MIMO_yearlyav.csv'
-    sets_to_columns_map:
-      physical_data: Variable
-      technologies: Technology
-    values: Value
   Storage parameters:
     ref_code: r_SESAM_25_IT_MIMO_storpar
     title: Storage parameters by technology
@@ -739,7 +777,53 @@ tech_info:
       physical_data: Variable
       technologies: Technology
     values: Value
-
+  Lifetime_initial:
+    ref_code: r_SESAM_25_IT_MIMO_lifetimes_initial
+    title: Operational and financial lifetimes of different technologies, Power sector, in 2000
+    author: SESAM
+    type: database
+    year: 2025
+    url: https://polimi365.sharepoint.com/:x:/r/sites/DENG-PRIN-MIMO98/Documenti%20condivisi/Models/data/_all/r_SESAM_25_IT_MIMO_tech_info/lifetimes%20(initial)/r_SESAM_25_IT_MIMO_lifetimes_initial.csv?d=w0552ed4847634558a07806cb9a463aa2&csf=1&web=1&e=cohKF7
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/lifetimes (initial)/r_SESAM_25_IT_MIMO_lifetimes_initial.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Techs
+    values: Lifetime_initial
+  Lifetime_initial_Others:
+    ref_code: r_SESAM_25_IT_MIMO_lifetimes
+    title: Operational and financial lifetimes of different technologies, excl. Power sector
+    author: SESAM
+    type: database
+    year: 2025
+    url: 
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/lifetimes/r_SESAM_25_IT_MIMO_lifetimes.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+    values: Value
+  Initial power capacity:
+    ref_code: r_EMBER_25_IT_eedata
+    title: Yearly electricity data
+    author: EMBER
+    type: database
+    year: 2025
+    url: https://ember-climate.org/data-catalogue/yearly-electricity-data/
+    path: 'data/_all/r_EMBER_25_IT_eedata/cap_op_in.csv'
+    sets_to_columns_map:
+      physical_data: Category
+      technologies: Variable
+    values: Value
+  Initial capacity (other):
+    ref_code: r_SESAM_25_IT_MIMO_cap_op_initial
+    title: Initial operative capacity 
+    author: SESAM
+    type: database
+    year: 2025
+    path: 'data/_all/r_SESAM_25_IT_MIMO_tech_info/initial capacity/r_SESAM_25_IT_MIMO_cap_op_initial.csv'
+    sets_to_columns_map:
+      physical_data: Variable
+      technologies: Technology
+    values: Value
 c_r:
   EU ETS:
     ref_code: r_ICAP_25_EU_ETSprc

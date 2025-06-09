@@ -216,6 +216,7 @@ class DataHarmonizer:
                                 raise ValueError(f"Tolerance for {var} in {file} is not properly defined: amount missing")
                                                         
                             if value['type'] == 'absolute' or value['type'] == 'abs':
+                                raw_data_with_tol[self.table_file_map[file]["values"]] = pd.to_numeric(raw_data_with_tol[self.table_file_map[file]["values"]], errors='coerce').fillna(0)
                                 raw_data_with_tol[self.table_file_map[file]["values"]] += value['amount']
                             if value['type'] == 'relative' or value['type'] == 'rel':
                                 raw_data_with_tol[self.table_file_map[file]["values"]] *= (1+value['amount'])
